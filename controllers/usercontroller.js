@@ -21,9 +21,9 @@ exports.createNewUser = async (req, res) => {
         
         if(!user){
             User.create({
-                name,
-                email,
-                phonenumber,
+                name:name,
+                email:email,
+                phonenumber:phonenumber,
                 password: Epassword
             }).then(() => {
                 res.json({success:true,message:"Account Created Successfully"})

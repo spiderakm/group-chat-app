@@ -18,8 +18,11 @@ const User = sequelize.define('User',{
         allowNul : false
     },
     phonenumber : {
-        type : Sequelize.INTEGER,
-        allowNul : false
+        type: Sequelize.STRING,
+        validate: {
+          len: [10, 20],
+          isNumeric: true
+        }
     },
     password : {
         type : Sequelize.STRING,

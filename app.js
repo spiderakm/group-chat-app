@@ -6,9 +6,15 @@ const userRoute = require('./routes/userroute');
 
 const sequelize = require('./utils/db');
 
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(
+    cors({
+        origin : "*",
+    })
+)
+
 
 app.use('/user', userRoute);
 
