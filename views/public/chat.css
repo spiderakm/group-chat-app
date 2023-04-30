@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+    background-color: rgb(76, 76, 247);
+    color: white;
+}
+
+h3{
+    background-image: url("../images/chat2.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
