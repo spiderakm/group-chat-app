@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp Page -> Expense Tracker</title>
+    <link rel="stylesheet" href="./public//signup.css">
+
+</head>
+<body>
+    <header>
+        <h1>Sign Up</h1>
+    </header>
+    <main>
+        <div id="error"></div>
+        <form >
+            <label for="name">Name</label>
+            <input type="text" id="name" class="name"  >
+            <label for="email">Email</label>
+            <input type="email" id="email" class="email" >
+            <label for="number">Phone Number</label>
+            <input type="number" id="number" class="number" >
+            <label for="password">Password</label>
+            <input type="password" id="password" class="password" >
+            <button id="signup">signup</button>
+        </form>
+        <p>Already have an account? <a href="./login.html">Sign In</a></p>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="signup.js"></script>
+</body>
+</html>
