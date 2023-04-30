@@ -5,5 +5,5 @@ const chatController = require('../controllers/chatcontroller')
 
 
 router.post('/message',authenticateUser.userAuthontication,chatController.userMessage)
-
+router.get("/showMessage",chatController.showMessage)
 module.exports = router

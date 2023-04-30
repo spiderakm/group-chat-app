@@ -16,3 +16,13 @@ exports.userMessage=async(req,res)=>{
     }
   
 }
+exports.showMessage=async(req,res)=>{
+    try{
+        const data=await messagedb.findAll()
+        res.json({allData:data})
+    }catch(err){
+        console.log("error in showing message on the screen",err)
+        res.json({Error:err})
+    }
+
+}

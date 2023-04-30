@@ -4,10 +4,12 @@ body{
 }
 
 header{
-    background-color: rgb(76, 76, 247);
+    background-color: rgb(6, 168, 6);
     color: white;
 }
-
+h2{
+    font-weight: bold;
+}
 h3{
     background-image: url("../images/chat2.png");
     background-repeat: no-repeat;
@@ -17,4 +19,20 @@ h3{
     margin-bottom: 10px;
     padding: 5px;
 }
+main{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;  
+}
+input[type="submit"] {
+    margin-left: -50px;
+    height: 20px;
+    width: 50px;
+}
 
+ul{
+    color:white;
+    text-align: left;
+}
