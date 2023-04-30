@@ -17,12 +17,8 @@ const User = sequelize.define('User',{
         unique : true,
         allowNul : false
     },
-    phonenumber : {
-        type: Sequelize.STRING,
-        validate: {
-          len: [10, 20],
-          isNumeric: true
-        }
+    phone : {
+        type : Sequelize.BIGINT
     },
     password : {
         type : Sequelize.STRING,

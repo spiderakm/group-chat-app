@@ -1,31 +1,30 @@
 const userName=document.getElementById("name")
-const email=document.getElementById('email')
-const number = document.getElementById('number')
 const password=document.getElementById("password")
+const phone=document.getElementById("phone")
+const email=document.getElementById("email")
 const signup=document.getElementById("signup")
-const SignUperror=document.getElementById("error")
+const SignUperror=document.getElementById('error')
 
-signup.addEventListener("click",submitSignup)
+signup.addEventListener('click',signupUser)
 
-async function submitSignup(e){
+async function signupUser(e){
     e.preventDefault()
-    let my_obj={
-        name:userName.value,
-        email:email.value,
-        phonenumber:number.value,
-        password:password.value
+    const obj={
+        userName:userName.value,
+        password:password.value,
+        phone:phone.value,
+        email:email.value
     }
-    const data=await axios.post("http://127.0.0.1:4000/user/signup",my_obj)
-    console.log(data)
-        //Errors in front end
-        if(data.data.success===false){
+    let data=await axios.post("http://localhost:4000/user/signup",obj)
+    //Errors in front end
+    if(data.data.success===false){
         const signUpText=document.createTextNode(data.data.message)
             SignUperror.appendChild(signUpText)
             SignUperror.style.color="red"
             console.log(SignUperror)
         setTimeout(()=>{
             SignUperror.removeChild(signUpText)
-        },3000)
+        },4000)
     }
     if(data.data.success===true){
         const signUpText=document.createTextNode(data.data.message)
@@ -34,6 +33,10 @@ async function submitSignup(e){
         console.log(SignUperror)
     setTimeout(()=>{
         SignUperror.removeChild(signUpText)
-    },3000)
+    },4000)
     }
+    userName.value=""
+    email.value=""
+    password.value=""
+    phone.value=""
 }
