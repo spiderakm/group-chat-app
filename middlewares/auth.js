@@ -1,5 +1,5 @@
 
-const User=require("../models/userModel")
+const User=require("../models/usermodel")
 const jwt=require("jsonwebtoken")
 
 

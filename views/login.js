@@ -34,6 +34,7 @@ async function loginPage(e){
             loginSuccess.removeChild(successText)
         },3000)
         localStorage.setItem('token', data.data.token)
+        window.location.href="./chat.html"
 
     }
 }catch{
