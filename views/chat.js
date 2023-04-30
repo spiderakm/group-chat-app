@@ -3,7 +3,10 @@ const sendButton=document.getElementById('send')
 
 window.addEventListener("DOMContentLoaded",async()=>{
     try{
-     const response=await axios.get("http://localhost:4000/chat/showMessage")
+     const response=await setInterval(() => {
+        axios.get("http://localhost:4000/chat/showMessage")
+     },1000) 
+     
      const showData=response.data.allData;
        for(let i=0;i<showData.length;i++){
          showChatOnScreen(showData[i].message)
