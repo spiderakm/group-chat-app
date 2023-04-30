@@ -13,7 +13,7 @@ async function loginPage(e){
                 email:email.value,
                 password:password.value
             }
-            const data=await axios.post("http://localhost:4000/user/signup",login_obj)
+            const data=await axios.post("http://localhost:4000/user/login",login_obj)
             //If email or password are wrong
             if(data.data.message){
                 const errorText=document.createTextNode(data.data.message)
@@ -33,7 +33,7 @@ async function loginPage(e){
         setTimeout(()=>{
             loginSuccess.removeChild(successText)
         },3000)
-
+        localStorage.setItem('token', data.data.token)
 
     }
 }catch{
