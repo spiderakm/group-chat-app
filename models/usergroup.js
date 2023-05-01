@@ -1,15 +1,13 @@
 const Sequelize=require("sequelize")
 const sequelize=require("../utils/db")
 
-const messagedb=sequelize.define("message",{
+const usergroupdb=sequelize.define("usergroup",{
     id:{
         type:Sequelize.INTEGER,
         autoIncrement:true,
         primaryKey:true
     },
-    message:Sequelize.STRING,
-    UserId:Sequelize.INTEGER,
-    groupId:Sequelize.INTEGER
+    isAdmin:Sequelize.BOOLEAN
 })
 
-module.exports=messagedb
+module.exports=usergroupdb

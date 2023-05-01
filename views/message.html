@@ -12,19 +12,15 @@
     <header>
         <h2>Chat App</h2><br>
         <div class="flexible">
-            <h3 class="chats">Groups</h3>
-            <button id="newGroup">Create Group</button>
+            <h3 class="chats">Chats</h3>
         </div>
     </header>
-   
-    <div id="createGroup1"></div>
-    <div id="createGroup2"></div><br>
-
-    <h2 id="myGroups">My groups</h2><hr>
-
-    <div id="groupNames"></div>
-    <div id="groupButtons"></div>
+    <ul id="allmessages"></ul>
+    <main>
+        <input type="text" id="chat" class="form-control" placeholder="Message">
+        <button id="send"><img src="./images/send.png" width="30px" height="30px"></button> 
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="chat.js"></script>
+    <script src="messages.js"></script>
 </body>
 </html>
