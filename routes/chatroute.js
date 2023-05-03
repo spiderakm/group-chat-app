@@ -5,5 +5,15 @@ const chatController = require('../controllers/chatcontroller')
 
 
 router.post('/message',authenticateUser.userAuthontication,chatController.userMessage)
+
+router.get("/allUsers",chatController.getAllUsers)
+
+router.post("/addToGroup",chatController.addToGroup)
+
+router.get("/getUsers",authenticateUser.userAuthontication,chatController.getpreferedUsers)
+
+router.post("/removeMember",chatController.removeMember)
+
 router.get("/showMessage",chatController.showMessage)
+
 module.exports = router

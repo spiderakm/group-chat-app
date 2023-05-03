@@ -11,7 +11,7 @@ exports.groupNames=async(req,res)=>{
         const groups=data.dataValues.id
         const response=await usergroupdb.create({
             groupNameId:groups,
-            userId:req.user.id,
+            UserId:req.user.id,
             isAdmin:true
         })
         console.log(response)
@@ -25,7 +25,7 @@ exports.groupNames=async(req,res)=>{
 exports.getAllGroupNames=async(req,res)=>{
     try{
         const id=req.user.id
-        const data=await usergroupdb.findAll({where:{userId:id}})
+        const data=await usergroupdb.findAll({where:{UserId:id}})
         
         const Namearr=[]
         const idarr=[]
