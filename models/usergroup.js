@@ -7,6 +7,8 @@ const usergroupdb=sequelize.define("usergroup",{
         autoIncrement:true,
         primaryKey:true
     },
+    groupNameId:Sequelize.INTEGER,
+    userId:Sequelize.INTEGER,
     isAdmin:Sequelize.BOOLEAN
 })
 

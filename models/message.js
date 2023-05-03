@@ -8,8 +8,9 @@ const messagedb=sequelize.define("message",{
         primaryKey:true
     },
     message:Sequelize.STRING,
-    UserId:Sequelize.INTEGER,
-    groupId:Sequelize.INTEGER
+    userId:Sequelize.INTEGER,
+    groupId:Sequelize.INTEGER,
+    userName:Sequelize.STRING
 })
 
 module.exports=messagedb

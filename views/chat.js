@@ -28,7 +28,7 @@ async function getAllGroupNames(addGroup){
         const groupNames=data.data.groupNames
         const groupId=data.data.groupId
         for(let i=0;i<groupNames.length;i++){
-            console.log(groupId)
+            
             let child=`<button onclick="insideGroup(${groupId[i]})" class="btn btn-secondary btn-lg" style="width:100%;margin-bottom:5px">${groupNames[i]}</button>`
             parent.innerHTML=parent.innerHTML+child
         }
@@ -55,25 +55,28 @@ async function insideGroup(id){
 //create new group button
 document.getElementById("newGroup").onclick=async()=>{
    try{
+       
         const inputBox=document.createElement("input")
         inputBox.type="text"
         inputBox.id="groupNameFirst"
+        inputBox.setAttribute("class","form-control")
         inputBox.placeholder="Type group name"
         const button=document.createElement("button")
         text=document.createTextNode("create")
         button.id="createButton"
+        button.setAttribute("class","btn btn-success rounded-pill")
         button.appendChild(text)
         const parent1=document.getElementById("createGroup1")
         const parent2=document.getElementById("createGroup2")
     
         parent1.appendChild(inputBox)
         parent2.appendChild(button)
-        
-    
+       
         //create group button functionality
         const createButton=document.getElementById("createButton")
         createButton.onclick=async()=>{
             try{
+                
                 const nameG=document.getElementById("groupNameFirst").value
                 const obj={
                     groupName:nameG
@@ -83,6 +86,8 @@ document.getElementById("newGroup").onclick=async()=>{
             headers:{"Authorization":getToken}
         })
             getAllGroupNames(response)
+        inputBox.style.display="none"
+        button.style.display="none"
             }catch(err){
                 console.log("error in create button",err)
             }
@@ -90,4 +95,9 @@ document.getElementById("newGroup").onclick=async()=>{
    }catch(err){
     console.log("error in new group",err)
    }
+}
+
+//logout from groups
+document.getElementById("logout").onclick=()=>{
+    window.location.href="./login.html"
 }

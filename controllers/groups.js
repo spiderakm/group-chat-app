@@ -8,13 +8,14 @@ exports.groupNames=async(req,res)=>{
         const data=await groupdb.create({
             nameOfGroup:groupname
         })
+        console.log(data);
         const groups=data.dataValues.id
         const response=await usergroupdb.create({
             groupNameId:groups,
-            UserId:req.user.id,
+            userId:req.user.id,
             isAdmin:true
         })
-        console.log(response)
+
         res.json({data:data})
     }catch(err){
         console.log("error in creating group BE",err)
@@ -25,7 +26,7 @@ exports.groupNames=async(req,res)=>{
 exports.getAllGroupNames=async(req,res)=>{
     try{
         const id=req.user.id
-        const data=await usergroupdb.findAll({where:{UserId:id}})
+        const data=await usergroupdb.findAll({where:{userId:id}})
         
         const Namearr=[]
         const idarr=[]

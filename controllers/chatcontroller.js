@@ -7,10 +7,14 @@ exports.userMessage=async(req,res)=>{
     try{
         const userMsg=req.body.chat
         const groupId= req.body.groupId
+        if(userMsg===""){
+            return res.json({succes:false,messsage:"message field empty"})
+        }
         const data=await messagedb.create({
          message:userMsg,
          userId:req.user.id,
-         groupId:groupId
+         groupId:groupId,
+         userName:req.user.name
         })
         res.json({data:data})
     }catch(err){
@@ -60,7 +64,7 @@ exports.getpreferedUsers=async(req,res)=>{
     try{
         const userId=req.user.id
     
-      const data= await usergroupdb.findAll({where:{groupNameId:userId}})
+      const data= await usergroupdb.findAll({where:{groupNameId:groupid}})
         let arr=[]
         for(let i=0;i<data.length;i++){
          const id=data[i].dataValues.userId
