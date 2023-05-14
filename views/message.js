@@ -1,3 +1,6 @@
+const socket = io('http://localhost:3000');
+
+
 
 const chat=document.getElementById("chat")
 const sendButton=document.getElementById('send')
@@ -33,6 +36,12 @@ window.addEventListener("DOMContentLoaded",async()=>{
                 showChatOnScreen(showData[i].id,showData[i].userName)   
         }
     }
+    socket.on('receive-message', async (group) => {
+        if(group == id){
+            console.log(lastMessageId);
+            await fetchNewMessages(id, groupMessagesBox, userId);
+        }
+    })
    
    }catch(err){
     console.log("dom loading error in messages",err)
@@ -70,11 +79,13 @@ async function sendChat(e){
             groupId:groupId,
             
         }
+        socket.emit('send-message',obj)
         const getToken=localStorage.getItem("token")
         const data=await axios.post("http://localhost:4000/chat/message",obj,{
             headers:{"Authorization":getToken}
         })
-       console.log(data)
+        console.log(data)
+        
         showChatOnScreen(data.data.data.id,data.data.data.userName,data.data.data.message)
     }catch(err){
         console.log("error in snding message",err)

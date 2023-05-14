@@ -14,6 +14,23 @@ const grouproute = require('./routes/grouproute')
 
 const sequelize = require('./utils/db');
 
+const server = require('http').createServer(app)
+const io = require('socket.io')(3000,{
+    cors: {
+        origin : "*"
+    }
+})
+
+io.on("connection", socket => {
+    console.log(`socket connection established with ${socket.id}`);
+    socket.on('send-message',data =>{
+        io.emit('receive-message', data)
+
+    })
+
+});
+
+
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -27,6 +44,8 @@ app.use(
 app.use('/user', userRoute);
 app.use("/chat",chat)
 app.use("/group",grouproute)
+
+
 
 
 //associations
