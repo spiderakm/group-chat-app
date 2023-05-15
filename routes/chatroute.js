@@ -16,4 +16,6 @@ router.post("/removeMember",chatController.removeMember)
 
 router.get("/showMessage",chatController.showMessage)
 
+router.post("/saveFile",chatController.uploadtoS3)
+
 module.exports = router

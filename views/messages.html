@@ -30,13 +30,52 @@
     
     </div>
     <ul id="allmessages" class=""></ul>
+    
     <main>
+        <form id="chatForm">
+            <input type="file" id="fileInput">
+            <button id="sendfile" type="submit">Send File</button>
+          </form>
+          
         <input type="text" id="chat" class="form-control" placeholder="Message">
         <button id="send"><img src="./public//send.png" width="30px" height="30px"></button> 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script type = "module" src="/views/message.js"></script>
+    <script>
+        async function addMembers(id){
+            console.log(id)
+            const groupId=localStorage.getItem("groupId")
+            const obj={
+                userId:id,
+                groupId:groupId
+            }
+            console.log(obj);
+            document.getElementById('showMemebrs').style.display = 'none'
+            const response=await axios.post("http://localhost:4000/chat/addToGroup",obj)
+        window.location.reload()
+        
+        confirm("User added successfully...")
+        }
+
+        //remove members
+        async function removeMember(id){
+            const groupId=localStorage.getItem("groupId")
+            const obj={
+                userId:id,
+                groupId:groupId
+            }
+            const members=document.getElementById("alreadyMember")  
+            const child=document.getElementById(id)
+            members.removeChild(child)
+            confirm("Do you want to remove this user?")
+            const response=await axios.post("http://localhost:4000/chat/removeMember",obj)
+            window.location.reload()
+        }
+
+
+    </script>
 
 </body>
 </html>

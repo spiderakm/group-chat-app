@@ -90,3 +90,33 @@ exports.removeMember=async(req,res)=>{
         res.json({Error:err})
     }   
 }
+
+exports.uploadtoS3 = async(req,res) => {
+    try {
+        if(req.user.premium === null){
+            res.status(401).send("You are not eligble please take premium subscription")
+        }else{
+            const groupId = req.body.groupId
+            const file = req.body.file
+    
+            const filename = `${file}`;
+            const fileUrl = await S3service.uploadToS3(file, filename);
+            console.log(fileUrl);
+
+            res.json({url:fileUrl})
+        
+
+        }
+
+        
+
+
+        
+    } catch (error) {
+        console.log("error in download file")
+        res.json({Error:err})
+    }
+
+
+}
+

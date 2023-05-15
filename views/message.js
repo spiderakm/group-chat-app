@@ -36,11 +36,9 @@ window.addEventListener("DOMContentLoaded",async()=>{
                 showChatOnScreen(showData[i].id,showData[i].userName)   
         }
     }
-    socket.on('receive-message', async (group) => {
-        if(group == id){
-            console.log(lastMessageId);
-            await fetchNewMessages(id, groupMessagesBox, userId);
-        }
+    socket.on('receive-message', async (data) => {
+        showChatOnScreen(data.data.data.id,data.data.data.userName,data.data.data.message)
+        console.log(data);
     })
    
    }catch(err){
@@ -84,14 +82,33 @@ async function sendChat(e){
         const data=await axios.post("http://localhost:4000/chat/message",obj,{
             headers:{"Authorization":getToken}
         })
+
+
+
+
+
+        showChatOnScreen(data.data.data.id,data.data.data.userName,data.data.data.message)
         console.log(data)
         
-        showChatOnScreen(data.data.data.id,data.data.data.userName,data.data.data.message)
+        
     }catch(err){
         console.log("error in snding message",err)
     }
 }
 
+const sendfile=document.getElementById('sendfile')
+sendfile.addEventListener("click",uploadfile)
+
+async function uploadfile(e){
+    e.preventDefault()
+    const groupId=localStorage.getItem("groupId")  
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const response = await axios.post('/chat/saveFile', {
+        file: file,
+        chatGroupId: groupId
+    })
+}
 //manage members button
 
 const manageButton=document.getElementById("manage")
@@ -183,7 +200,8 @@ const members=document.getElementById("alreadyMember")
             if(adminAccess[i]===decodeToken.UserId){
                 for(let i=0;i<addMembersArray.length;i++){
                     const child=`<li>${users[addMembersArray[i]-1].name}
-                   <button onclick="addMember(${users[addMembersArray[i]-1].id})" class="btn btn-success btn-sm" style="float:right">add</button></li><br>`
+                   <button onclick="addMembers(${users[addMembersArray[i]-1].id})" class="btn btn-success btn-sm" style="float:right">add</button></li><br>`
+                   console.log(child);
                    parentUser.innerHTML=parentUser.innerHTML+child
              }   
             }else{
@@ -196,7 +214,6 @@ const members=document.getElementById("alreadyMember")
       
 //members
    for(let i=0;i<adminAccess.length;i++){
-    console.log(decodeToken.UserId);
     if(adminAccess[i]===decodeToken.UserId){
         for(let i=0;i<membersArray.length;i++){
             if(membersArray[i]!==decodeToken.UserId){
@@ -231,13 +248,14 @@ document.getElementById("back").onclick=()=>{
 }
 
 //addMember button
-async function addMember(id){
+async function addMembers(id){
     console.log(id)
     const groupId=localStorage.getItem("groupId")
     const obj={
         userId:id,
         groupId:groupId
     }
+    console.log(obj);
     document.getElementById('showMemebrs').style.display = 'none'
     const response=await axios.post("http://localhost:4000/chat/addToGroup",obj)
    window.location.reload()
