@@ -35,9 +35,9 @@ exports.getAllGroupNames=async(req,res)=>{
             const groupName=await groupdb.findAll({where:{id:groupNameId}})
             groupName.forEach((ele2)=>{
                     let name=ele2.dataValues.nameOfGroup
-                  let id=ele2.dataValues.id
+                    let id=ele2.dataValues.id
                     idarr.push(id)
-                  Namearr.push(name)
+                    Namearr.push(name)
                 })
            
         }

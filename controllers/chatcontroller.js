@@ -46,7 +46,7 @@ exports.getAllUsers=async(req,res)=>{
 
 exports.addToGroup=async(req,res)=>{
     try{
-       const userId= req.body.userId
+        const userId= req.body.userId
         const groupId= req.body.groupId
        
         const data=await usergroupdb.create({
@@ -82,8 +82,8 @@ exports.removeMember=async(req,res)=>{
     try{
         const userId= req.body.userId
         const groupId=req.body.groupId
-         const data=await usergroupdb.findOne({where:{userId:userId,groupNameId:groupId}})
-         data.destroy()
+        const data=await usergroupdb.findOne({where:{userId:userId,groupNameId:groupId}})
+        data.destroy()
         
     }catch(err){
         console.log("error in remove members",err)
@@ -93,24 +93,16 @@ exports.removeMember=async(req,res)=>{
 
 exports.uploadtoS3 = async(req,res) => {
     try {
-        if(req.user.premium === null){
-            res.status(401).send("You are not eligble please take premium subscription")
-        }else{
-            const groupId = req.body.groupId
-            const file = req.body.file
+
+        const groupId = req.body.groupId
+        const file = req.body.file
     
-            const filename = `${file}`;
-            const fileUrl = await S3service.uploadToS3(file, filename);
-            console.log(fileUrl);
+        const filename = `${file}`;
+        const fileUrl = await S3service.uploadToS3(file, filename);
+        console.log(fileUrl);
 
-            res.json({url:fileUrl})
+        res.json({url:fileUrl})
         
-
-        }
-
-        
-
-
         
     } catch (error) {
         console.log("error in download file")

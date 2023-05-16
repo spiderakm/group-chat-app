@@ -2,9 +2,10 @@
 const User = require('../models/usermodel');
 const bcrypt =  require('bcrypt')
 const jwt = require('jsonwebtoken')
-
+const dotenv = require('dotenv');
+dotenv.config();
 function genrateToken(id){
-    return jwt.sign({ UserId : id },"44d210c98f36c60b0b0a336bd537fdd0305cefee41aa7e8d73aca3f150ab8f38265bb32731c2c3a296327027ce4ddf4a569d2aa9e5e9494badcb6e9eb66899ad")
+    return jwt.sign({ UserId : id },process.env.JWT_SECRET_KEY)
 }
 
 exports.createNewUser = async (req, res) => {
@@ -57,10 +58,8 @@ exports.authenticateUser = async (req,res) => {
             res.json({success:false,message:"User not found please Signup"})
         }else{
             const passwordMatch = await bcrypt.compare(req.body.password,user.password)
-            if(passwordMatch){
-                // res.redirect("http://localhost:4000/expense/add-expense")   
+            if(passwordMatch){ 
                 res.json({success:"Successfully logged In", token : genrateToken(user.id)})
-                //console.log(user.id)
             }else{
                 res.json({success:false,message:"Wrong Email or Password"})
             }
